@@ -16,7 +16,7 @@ from queries import insert_user
 from queries import check_user_existence
 
 
-file_db_path = "dictionary_db.sqlite"
+db_path = "dictionary_db.sqlite"
 logger = logging.getLogger("logger.db_api")
 
 
@@ -58,7 +58,7 @@ def execute_read_query(connection, query):
 
 # Добавить в БД нового пользователя при первом запуске бота
 def insert_new_user(id_tg):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     if not execute_read_query(connection, check_user_existence.format(id_tg)):
         execute_query(connection, insert_user.format(id_tg))
         logger.info("[insert_new_user] Command to add new user completed")
@@ -68,7 +68,7 @@ def insert_new_user(id_tg):
 
 # Вывести все записи из словаря
 def print_dictionary(id_tg):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     records = execute_read_query(connection, print_all_records.format(id_tg))
 
     if not records:
@@ -87,7 +87,7 @@ def print_dictionary(id_tg):
 # Добавить новую запись в словарь
 def add_record_in_dict(id_tg, record):
     record.lower()
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
 
     if not check_regex_coincidence(record):
         logger.info(f"[add_record_in_dict] Record to add is incorrect '{record}'")
@@ -108,7 +108,7 @@ def add_record_in_dict(id_tg, record):
 
 # Удалить запись из словаря
 def delete_record_from_dict(id_tg, word):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     records = execute_read_query(connection, check_record_existence.format(id_tg, word))
 
     if not records:
@@ -123,7 +123,7 @@ def delete_record_from_dict(id_tg, word):
 
 # Вывести все "новые" записи
 def print_new_records(id_tg):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     records = execute_read_query(connection, get_reords_by_status.format(id_tg, 0))
 
     if not records:
@@ -141,7 +141,7 @@ def print_new_records(id_tg):
 
 # Вывести все изученные записи
 def print_learned_records(id_tg):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     records = execute_read_query(connection, get_reords_by_status.format(id_tg, 1))
 
     if not records:
@@ -159,7 +159,7 @@ def print_learned_records(id_tg):
 
 # Измененить статус записи на "изученный"
 def change_one_status(id_tg, word):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     records = execute_read_query(connection, check_record_existence.format(id_tg, word))
 
     if not records:
@@ -173,7 +173,7 @@ def change_one_status(id_tg, word):
 
 # Измененить статус всех записей на "изученный"
 def change_all_status(id_tg):
-    connection = create_connection(file_db_path)
+    connection = create_connection(db_path)
     execute_query(connection, change_status_all_records.format(id_tg))
 
     logger.info("[change_all_status] Command to change all status completed")
