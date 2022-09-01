@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "englishlearnbot"
+version = "0.1.0"
+description = ""
+authors = ["KaiLey"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+dotenv = "^0.0.5"
+pyTelegramBotAPI = "^4.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
