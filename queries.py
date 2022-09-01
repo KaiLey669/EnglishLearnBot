@@ -84,3 +84,7 @@ print_all_users = """
 SELECT *
 FROM users
 """
+
+delete_all = """
+DELETE FROM dictionary WHERE id_user = {}
+"""

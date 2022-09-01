@@ -13,6 +13,7 @@ from db_api import print_learned_records
 from db_api import change_all_status
 from db_api import change_one_status
 from db_api import insert_new_user
+from db_api import delete_all_records
 
 from logger import init_logger
 
@@ -53,7 +54,8 @@ btn_names = [
     "Вывести все записи",
     "Вывести новые записи",
     "Вывести старые записи",
-    "Изменить статус всех новых записей"
+    "Изменить статус всех новых записей",
+    "Удалить все записи"
 ]
 
 
@@ -63,7 +65,8 @@ def create_start_keyboard():
     print_new_btn = types.KeyboardButton(btn_names[1])
     print_old_btn = types.KeyboardButton(btn_names[2])
     change_all_btn = types.KeyboardButton(btn_names[3])
-    markup.add(print_all_btn, print_new_btn, print_old_btn, change_all_btn)
+    delete_all_btn = types.KeyboardButton(btn_names[4])
+    markup.add(print_all_btn, print_new_btn, print_old_btn, change_all_btn, delete_all_btn)
     return markup
 
 
@@ -142,6 +145,12 @@ if __name__ == '__main__':
         elif message.text == btn_names[3]:
             logger.info(f"Enter message '{message.text}'")
             mes_api = change_all_status(message.chat.id)
+            bot.send_message(message.chat.id, mes_api)
+
+        # Удалить все записи
+        elif message.text == btn_names[4]:
+            logger.info(f"Enter message '{message.text}'")
+            mes_api = delete_all_records(message.chat.id)
             bot.send_message(message.chat.id, mes_api)
 
         # Добавление записей с проверкой по паттерну

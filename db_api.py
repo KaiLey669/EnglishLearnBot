@@ -14,6 +14,7 @@ from queries import check_unique_record
 from queries import check_record_existence
 from queries import insert_user
 from queries import check_user_existence
+from queries import delete_all
 
 
 db_path = "dictionary_db.sqlite"
@@ -178,6 +179,15 @@ def change_all_status(id_tg):
 
     logger.info("[change_all_status] Command to change all status completed")
     return "Статус всех записей изменен"
+
+
+# Удалить все записи
+def delete_all_records(id_tg):
+    connection = create_connection(db_path)
+    execute_query(connection, delete_all.format(id_tg))
+
+    logger.info("[delete_all_records] Command to delete all records complete")
+    return "Все записи удалены"
 
 
 # Проверить новую запись по паттерну
