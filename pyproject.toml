@@ -6,9 +6,9 @@ authors = ["KaiLey"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-dotenv = "^0.0.5"
-pyTelegramBotAPI = "^4.7.0"
+python = "<3.9"
+dotenv = "<0.0.5"
+pyTelegramBotAPI = "<4.7.0"
 
 
 [build-system]
