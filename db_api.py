@@ -87,8 +87,8 @@ def print_dictionary(id_tg):
 
 # Добавить новую запись в словарь
 def add_record_in_dict(id_tg, record):
-    record.lower()
     connection = create_connection(db_path)
+    record = record.lower()
 
     if not check_regex_coincidence(record):
         logger.info(f"[add_record_in_dict] Record to add is incorrect '{record}'")
@@ -110,6 +110,7 @@ def add_record_in_dict(id_tg, record):
 # Удалить запись из словаря
 def delete_record_from_dict(id_tg, word):
     connection = create_connection(db_path)
+    word = word.lower()
     records = execute_read_query(connection, check_record_existence.format(id_tg, word))
 
     if not records:
