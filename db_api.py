@@ -4,6 +4,8 @@ from sqlite3 import Error
 import re
 import logging
 
+from queries import create_users_table
+from queries import create_dictionary_table
 from queries import insert_record
 from queries import delete_record
 from queries import print_all_records
@@ -55,6 +57,13 @@ def execute_read_query(connection, query):
         return result
     except Error as e:
         logger.error(f"The error '{e}' occurred in read query")
+
+
+# Создание таблиц
+def create_tables():
+    connection = create_connection(db_path)
+    execute_query(connection, create_users_table)
+    execute_query(connection, create_dictionary_table)
 
 
 # Добавить в БД нового пользователя при первом запуске бота

@@ -5,6 +5,7 @@ from telebot import types
 
 from config import TOKEN
 
+from db_api import create_tables
 from db_api import add_record_in_dict
 from db_api import delete_record_from_dict
 from db_api import print_dictionary
@@ -73,8 +74,9 @@ if __name__ == '__main__':
     @bot.message_handler(commands=["start"])
     def start_customization(message):
         logger.info("Enter command '/start'")
-        insert_new_user(message.chat.id)
         markup = create_start_keyboard()
+        create_tables()
+        insert_new_user(message.chat.id)
         bot.send_message(message.chat.id, "Бот запущен", reply_markup=markup)
 
 
