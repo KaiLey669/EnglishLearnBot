@@ -104,12 +104,12 @@ def add_record_in_dict(id_tg, record):
         return "Запись слишком длинная. Максимум 100 символов, включая пробелы и знаки пунктуации"
     if not check_regex_coincidence(record):
         logger.info(f"[add_record_in_dict] Record to add is incorrect '{record}'")
-        return "Запись введена неверно"
+        return "Запись введена неверно(разрешены символы '.', ',', ':', '(', ')', )"
     if not check_unique(connection, id_tg, record):
         logger.info(f"[add_record_in_dict] Record '{record}' is already in dictionary")
         return "Запись уже в словаре"
 
-
+    record = record.replace('\n', ' ')
     dash_index = record.find("-")  # Поиск первого вхождения тире
     word = record[:dash_index - 1]  # -1 чтобы убрать пробел
     translation = record[dash_index + 2:]  # +2 чтобы убрать пробел
@@ -147,7 +147,8 @@ def print_new_records(id_tg):
     message = ""
     for tup in records:
         record = list(tup)
-        message += f"{record[0]}:{record[1]}\n"
+        message += f"{record[0]}|{record[1]}\n"
+
 
     logger.info("[print_new_records] Command to print new records completed")
     return message
@@ -205,8 +206,8 @@ def delete_all_records(id_tg):
 
 # Проверить новую запись по паттерну
 def check_regex_coincidence(record):
-    regex = "[a-z]+[\s][-][\s][а-я]+"
-    return True if re.match(regex, record) and record.find(":") == -1 else False
+    regex = "[a-z]+[ ][-][ ][а-я][а-я,.()-: ]+"
+    return True if re.match(regex, record) else False
 
 
 # Проверить уникальность новой записи

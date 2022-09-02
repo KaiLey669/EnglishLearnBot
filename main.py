@@ -1,4 +1,5 @@
 import logging
+import re
 
 import telebot
 from telebot import types
@@ -126,7 +127,8 @@ if __name__ == '__main__':
             else:
                 records = mes_api.split("\n")
                 for record in records:
-                    words = record.split(":")
+                    words = record.split("|")
+                    words[1] = re.escape(words[1])
                     bot.send_message(message.chat.id, f"{words[0].strip()} \- ||{words[1].strip()}||",
                                      parse_mode="MarkdownV2")
 
