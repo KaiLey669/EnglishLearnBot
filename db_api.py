@@ -217,11 +217,3 @@ def check_unique(connection, id_tg, record):
     records = execute_read_query(connection, check_unique_record.format(id_tg, word))
 
     return True if len(records) == 0 else False
-
-q = """
-SELECT * FROM dictionary
-"""
-
-# con = create_connection(db_path)
-# records = execute_read_query(con, q)
-# print(records)
