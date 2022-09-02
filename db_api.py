@@ -144,7 +144,7 @@ def print_new_records(id_tg):
     message = ""
     for tup in records:
         record = list(tup)
-        message += f"{record[0]}:{record[1]}\n"  # Можно попробовать убрать разделитель :
+        message += f"{record[0]}:{record[1]}\n"
 
     logger.info("[print_new_records] Command to print new records completed")
     return message
