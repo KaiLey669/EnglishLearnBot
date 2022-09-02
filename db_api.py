@@ -203,7 +203,7 @@ def delete_all_records(id_tg):
 # Проверить новую запись по паттерну
 def check_regex_coincidence(record):
     regex = "[a-z]+[\s][-][\s][а-я]+"
-    return True if re.match(regex, record) and record.find(":") == -1 else False
+    return True if re.fullmatch(regex, record) and record.find(":") == -1 else False
 
 
 # Проверить уникальность новой записи
