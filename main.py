@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
     # Изменить статус одной записи на "изучено"(/change [english_word])
     @bot.message_handler(commands=["change"])
-    def change_one_status(message):
+    def change_status(message):
         logger.info(f"Enter command '/change' with message {message.text}")
         words = message.text.split(" ", 1)  # Передаем все, что следует после команды
         if len(words) == 1:

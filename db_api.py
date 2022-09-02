@@ -9,7 +9,7 @@ from queries import create_dictionary_table
 from queries import insert_record
 from queries import delete_record
 from queries import print_all_records
-from queries import get_reords_by_status
+from queries import get_records_by_status
 from queries import change_status_all_records
 from queries import change_status_one_record
 from queries import check_unique_record
@@ -138,7 +138,7 @@ def delete_record_from_dict(id_tg, word):
 # Вывести все "новые" записи
 def print_new_records(id_tg):
     connection = create_connection(db_path)
-    records = execute_read_query(connection, get_reords_by_status.format(id_tg, 0))
+    records = execute_read_query(connection, get_records_by_status.format(id_tg, 0))
 
     if not records:
         logger.info("[print_new_records] No records in dictionary")
@@ -157,7 +157,7 @@ def print_new_records(id_tg):
 # Вывести все изученные записи
 def print_learned_records(id_tg):
     connection = create_connection(db_path)
-    records = execute_read_query(connection, get_reords_by_status.format(id_tg, 1))
+    records = execute_read_query(connection, get_records_by_status.format(id_tg, 1))
 
     if not records:
         logger.info("[print_learned_records] No records in dictionary")
@@ -174,6 +174,7 @@ def print_learned_records(id_tg):
 
 # Измененить статус записи на "изученный"
 def change_one_status(id_tg, word):
+    print(word)
     connection = create_connection(db_path)
     records = execute_read_query(connection, check_record_existence.format(id_tg, word))
 
@@ -216,3 +217,11 @@ def check_unique(connection, id_tg, record):
     records = execute_read_query(connection, check_unique_record.format(id_tg, word))
 
     return True if len(records) == 0 else False
+
+q = """
+SELECT * FROM dictionary
+"""
+
+# con = create_connection(db_path)
+# records = execute_read_query(con, q)
+# print(records)

@@ -22,7 +22,7 @@ FROM dictionary
 WHERE id_user = {}
 """
 
-get_reords_by_status = """
+get_records_by_status = """
 SELECT word, translation
 FROM dictionary
 WHERE id_user = {0} and status = {1}
@@ -71,7 +71,7 @@ WHERE id_user = {} and status = 0
 change_status_one_record = """
 UPDATE dictionary
 SET status = 1
-WHERE id_user = {} and word = {}
+WHERE id_user = {} and word = '{}'
 """
 
 check_record_existence = """
