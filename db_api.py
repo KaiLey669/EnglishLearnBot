@@ -99,6 +99,9 @@ def add_record_in_dict(id_tg, record):
     connection = create_connection(db_path)
     record = record.lower()
 
+    if len(record) >= 100:
+        logger.info(f"[add_record_in_dict] Record to add is to long")
+        return "Запись слишком длинная. Максимум 100 символов, включая пробелы и знаки пунктуации"
     if not check_regex_coincidence(record):
         logger.info(f"[add_record_in_dict] Record to add is incorrect '{record}'")
         return "Запись введена неверно"
