@@ -174,7 +174,6 @@ def print_learned_records(id_tg):
 
 # Измененить статус записи на "изученный"
 def change_one_status(id_tg, word):
-    print(word)
     connection = create_connection(db_path)
     records = execute_read_query(connection, check_record_existence.format(id_tg, word))
 
